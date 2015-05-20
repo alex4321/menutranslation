@@ -1,0 +1,5 @@
+name: Menu translation
+type: module
+core: 8.x
+description: Allow to translate menu items
+package: Multilingual

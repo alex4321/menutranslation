@@ -1,0 +1,20 @@
+menutranslation.translate:
+  path: '/admin/structure/menu/link/{menu_link}/translate'
+  base_route: menu_ui.link_edit
+  defaults:
+    _form: '\Drupal\menutranslation\Form\MenuTranslationForm'
+    _title: 'Translation of menu item'
+  options:
+    parameters:
+      menu_link:
+        type: menu_link_plugin
+  requirements:
+    _permission: 'access administration pages'
+menutranslation.translate_entity:
+  path: '/admin/structure/menu/item/{id}/translate'
+  base_route: menu_ui.link_edit
+  defaults:
+    _form: '\Drupal\menutranslation\Form\MenuEntityTranslationForm'
+    _title: 'Translation of menu item'
+  requirements:
+    _permission: 'access administration pages'

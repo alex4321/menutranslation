@@ -1,0 +1,30 @@
+<?php
+
+function menutranslation_preprocess_menu(&$variables, $hook) {
+  $config = \Drupal\menutranslation\Config\MenuTranslationConfig::get();
+  $language = Drupal::languageManager()->getCurrentLanguage();
+  foreach($variables['items'] as &$item) {
+    $title = $config->get_translated($item['title'], $language);
+    if($title!=NULL) {
+      $item['title'] = $title;
+    }
+  }
+}
+
+function __menutranslation_current_translation_path() {
+  $path = \Drupal::request()->getRequestUri();
+  $query_parts = explode('?', $path);
+  $parts = explode('/', $query_parts[0]);
+  $parts[count($parts) - 1] = 'translate';
+  $url = implode('/', $parts);
+
+  return $url;
+}
+
+function menutranslation_form_alter(&$form, $form_state, $form_id) {
+  if(in_array($form_id, ['menu_link_content_menu_link_content_form', 'menu_link_edit'])) {
+    $form['translate_link'] = [
+      '#markup' => sprintf("<a href=\"%s\">%s</a>", __menutranslation_current_translation_path(), t('Translate menu item'))
+    ];
+  }
+}

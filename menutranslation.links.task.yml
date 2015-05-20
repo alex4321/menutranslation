@@ -1,0 +1,4 @@
+menutranslation.translate1:
+  title: Translate
+  route_name: menutranslation.translate
+  base_route: menu_ui.link_edit
